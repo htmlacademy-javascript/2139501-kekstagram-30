@@ -31,8 +31,6 @@ const NAMES = [
   'Вероника',
 ];
 
-const PICTURES_COUNT = 25;
-
 const getRandomInteger = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -79,5 +77,5 @@ const createPictureInfo = () => {
   };
 };
 
-//const picturesInfo = Array.from({length: PICTURES_COUNT}, createPictureInfo);
+//const picturesInfo = Array.from({length: 25}, createPictureInfo);
 createPictureInfo();
