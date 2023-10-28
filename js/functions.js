@@ -1,13 +1,11 @@
 //Функция для проверки длины строки.
-const checkStringLength = function(verifiableString, requiredLength) {
-  return verifiableString.length <= requiredLength;
-};
+const checkStringLength = (verifiableString, requiredLength) => verifiableString.length <= requiredLength;
 
 checkStringLength('проверяемая строка', 20);
 
 //Функция для проверки, является ли строка палиндромом.
 
-const checkForPalindrome = function(verifiableString) {
+const checkForPalindrome = (verifiableString) => {
 
   let normalizedString = verifiableString.replaceAll(' ', '');
   normalizedString = normalizedString.toLowerCase();
