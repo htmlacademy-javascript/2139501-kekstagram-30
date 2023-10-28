@@ -79,4 +79,5 @@ const createPictureInfo = () => {
   };
 };
 
-const picturesInfo = Array.from({length: PICTURES_COUNT}, createPictureInfo);
+//const picturesInfo = Array.from({length: PICTURES_COUNT}, createPictureInfo);
+createPictureInfo();
