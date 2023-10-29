@@ -57,7 +57,7 @@ const randomId = getRandomId(1, 25);
 const randomUrl = getRandomId(1, 25);
 const randomCommentId = getRandomId(1, 1000);
 
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+const getRandomArrayElement = (elements) => getRandomInteger(0, elements.length - 1);
 
 const createCommentsInfo = () => ({
   id: randomCommentId(),
@@ -66,16 +66,14 @@ const createCommentsInfo = () => ({
   name: getRandomArrayElement(NAMES),
 });
 
-const createPictureInfo = () => {
-  const pictureUrl = randomUrl();
-  return {
+const createPictureInfo = () => (
+  {
     id: randomId(),
-    url: `photos/${pictureUrl}.jpg`,
-    description: DESCRIPTIONS[pictureUrl - 1],
+    url: `photos/${randomUrl()}.jpg`,
+    description: DESCRIPTIONS[getRandomArrayElement(DESCRIPTIONS)],
     likes: getRandomInteger(15, 200),
     comments: Array.from({length: getRandomInteger(0, 30)}, createCommentsInfo)
-  };
-};
+  });
 
 //const picturesInfo = Array.from({length: 25}, createPictureInfo);
 createPictureInfo();
