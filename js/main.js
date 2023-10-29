@@ -73,7 +73,11 @@ const createPictureInfo = () => (
     description: DESCRIPTIONS[getRandomArrayElement(DESCRIPTIONS)],
     likes: getRandomInteger(15, 200),
     comments: Array.from({length: getRandomInteger(0, 30)}, createCommentsInfo)
-  });
+  }
+);
 
-//const picturesInfo = Array.from({length: 25}, createPictureInfo);
-createPictureInfo();
+const photoDescriptionArray = [];
+
+while(photoDescriptionArray.length < 25) {
+  photoDescriptionArray.push(createPictureInfo());
+}
