@@ -9,7 +9,7 @@ const getRandomInteger = (min, max) => {
 //Функция для извлечения случайной строки из массива
 const getRandomArrayElement = (elements) => getRandomInteger(0, elements.length - 1);
 
-//Функция-генератор случайного числа в заданном диапазоне
+//Функция-генератор случайного неповторяющегося числа в заданном диапазоне
 const getRandomId = (min, max) => {
   const previousId = [];
   return function () {
