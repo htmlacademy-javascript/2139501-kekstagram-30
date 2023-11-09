@@ -1,5 +1,3 @@
-import {getRandomInteger, getRandomArrayElement, getRandomId} from './utils.js';
-
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -33,37 +31,4 @@ const NAMES = [
   'Вероника',
 ];
 
-const randomId = getRandomId(1, 25);
-const randomUrl = getRandomId(1, 25);
-const randomCommentId = getRandomId(1, 1000);
-
-//Функция для создания объекта с комментарием
-const createCommentsInfo = () => ({
-  id: randomCommentId(),
-  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-  message: getRandomArrayElement(MESSAGES),
-  name: getRandomArrayElement(NAMES),
-});
-
-//Функция для создания объекта с описанием к фотографии
-const createPictureInfo = () => (
-  {
-    id: randomId(),
-    url: `photos/${randomUrl()}.jpg`,
-    description: DESCRIPTIONS[getRandomArrayElement(DESCRIPTIONS)],
-    likes: getRandomInteger(15, 200),
-    comments: Array.from({length: getRandomInteger(0, 30)}, createCommentsInfo)
-  }
-);
-
-//Создаём массив объектов с комментариями
-const getPhotoArray = () => {
-  const photoDescriptionArray = [];
-
-  while(photoDescriptionArray.length < 25) {
-    photoDescriptionArray.push(createPictureInfo());
-  }
-  return photoDescriptionArray;
-};
-
-export {getPhotoArray};
+export {NAMES, MESSAGES, DESCRIPTIONS};
