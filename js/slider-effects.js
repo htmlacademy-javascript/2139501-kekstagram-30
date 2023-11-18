@@ -1,11 +1,13 @@
-const sliderContainer = document.querySelector('.effect-level__slider');
+const sliderContainer = document.querySelector('.img-upload__effect-level');
+const sliderField = document.querySelector('.effect-level__slider');
 const effectsContainer = document.querySelector('.effects__list');
 const effectValue = document.querySelector('.effect-level__value');
 const photo = document.querySelector('.img-upload__preview img');
+const noneEffectButton = document.querySelector('#effect-none');
 
-document.querySelector('.img-upload__effect-level').classList.add('hidden');
+sliderContainer.classList.add('hidden');
 
-noUiSlider.create(sliderContainer, {
+noUiSlider.create(sliderField, {
   range: {
     min: 0,
     max: 1,
@@ -23,7 +25,7 @@ noUiSlider.create(sliderContainer, {
   },
 });
 const getSliderUpdate = (min, max, step) => {
-  sliderContainer.noUiSlider.updateOptions({
+  sliderField.noUiSlider.updateOptions({
     range: {
       min: min,
       max: max
@@ -33,10 +35,10 @@ const getSliderUpdate = (min, max, step) => {
   });
 };
 const getEffect = (effect, unit) => {
-  document.querySelector('.img-upload__effect-level').classList.remove('hidden');
-  sliderContainer.noUiSlider.on('update', () => {
-    photo.style.filter = `${effect}(${sliderContainer.noUiSlider.get()}${unit})`;
-    effectValue.value = sliderContainer.noUiSlider.get();
+  sliderContainer.classList.remove('hidden');
+  sliderField.noUiSlider.on('update', () => {
+    photo.style.filter = `${effect}(${sliderField.noUiSlider.get()}${unit})`;
+    effectValue.value = sliderField.noUiSlider.get();
   });
 };
 
@@ -57,7 +59,15 @@ effectsContainer.addEventListener('change', (evt) => {
     getSliderUpdate(1, 3, 0.1);
     getEffect('brightness','');
   } else {
-    document.querySelector('.img-upload__effect-level').classList.add('hidden');
+    sliderContainer.classList.add('hidden');
     photo.style.filter = '';
   }
 });
+
+const resetEffects = () => {
+  sliderContainer.classList.add('hidden');
+  photo.style.filter = '';
+  noneEffectButton.checked = true;
+};
+
+export {resetEffects};
