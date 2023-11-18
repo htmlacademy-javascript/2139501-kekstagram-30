@@ -1,12 +1,9 @@
-import {getPhotoArray} from './getPhotoArray.js';
-
 const picturesContainer = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const picturesArrayObj = getPhotoArray();
 const picturesFragment = document.createDocumentFragment();
 
-const getPictures = () => {
-  picturesArrayObj.forEach(({id, url, description, likes, comments}) => {
+const getPictures = (data) => {
+  data.forEach(({id, url, description, likes, comments}) => {
     const picture = pictureTemplate.cloneNode(true);
     const photo = picture.querySelector('.picture__img');
     photo.dataset.id = id;
@@ -20,4 +17,4 @@ const getPictures = () => {
   return picturesContainer.append(picturesFragment);
 };
 
-export {getPictures, picturesContainer, picturesArrayObj};
+export {getPictures, picturesContainer};

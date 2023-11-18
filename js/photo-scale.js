@@ -17,3 +17,10 @@ scaleBigger.addEventListener('click', () => {
     photo.style.transform = `scale(${scaleValue.value})`;
   }
 });
+
+const resetScale = () => {
+  photo.style.transform = '';
+  scaleValue.value = '100%';
+};
+
+export {resetScale};
