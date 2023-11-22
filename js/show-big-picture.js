@@ -1,4 +1,4 @@
-import {picturesContainer} from './get-pictures.js';
+import {picturesContainer} from './get-pictures';
 import {isEscapeKey} from './utils';
 
 const bigPicturePopup = document.querySelector('.big-picture');

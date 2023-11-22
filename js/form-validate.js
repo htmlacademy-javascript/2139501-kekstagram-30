@@ -1,5 +1,5 @@
-import {isEscapeKey} from './utils.js';
-import {sendServerData} from './server.js';
+import {isEscapeKey} from './utils';
+import {sendServerData} from './server';
 
 const hashtagRegular = /^#[a-zа-яё0-9]{1,19}$/i;
 
