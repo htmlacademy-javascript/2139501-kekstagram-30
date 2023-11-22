@@ -1,7 +1,9 @@
-import {isEscapeKey} from './utils.js';
-import {closeModal} from './form-validate.js';
-import {resetScale} from './photo-scale.js';
-import {resetEffects} from './slider-effects.js';
+import {isEscapeKey} from './utils';
+import {showBigPicture} from './show-big-picture';
+import {closeModal} from './form-validate';
+import {resetScale} from './photo-scale';
+import {resetEffects} from './slider-effects';
+import {initSort} from './sort';
 
 const downloadErrorTemplateContent = document.querySelector('#data-error').content.querySelector('.data-error');
 
@@ -57,7 +59,7 @@ const getUploadErrorMessage = () => {
   });
 };
 
-const getServerData = (onSuccess) => {
+const getServerData = (getPictures) => {
   fetch('https://30.javascript.pages.academy/kekstagram/data')
     .then((response) => {
       if(!response.ok) {
@@ -66,7 +68,9 @@ const getServerData = (onSuccess) => {
       return response.json();
     })
     .then((pictures) => {
-      onSuccess(pictures);
+      getPictures(pictures);
+      showBigPicture(pictures);
+      initSort(pictures);
     })
     .catch(() => {
       getDownloadErrorMessage();
