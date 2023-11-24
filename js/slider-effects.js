@@ -70,4 +70,8 @@ const resetEffects = () => {
   noneEffectButton.checked = true;
 };
 
+sliderField.noUiSlider.on('update',() => {
+  effectValue.setAttribute('value', String(sliderField.noUiSlider.get(true)));
+});
+
 export {resetEffects};

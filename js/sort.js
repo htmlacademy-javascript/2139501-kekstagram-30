@@ -1,7 +1,8 @@
-import { getPictures } from './get-pictures';
-import { debounce, randomNumGenerator } from './utils';
+import {getPictures} from './get-pictures';
+import {debounce, randomNumGenerator} from './utils';
 
 const filtersContainer = document.querySelector('.img-filters');
+const filtersForm = document.querySelector('.img-filters__form');
 const sortButtons = filtersContainer.querySelectorAll('.img-filters__button');
 const defaultSortButton = filtersContainer.querySelector('#filter-default');
 const randomSortButton = filtersContainer.querySelector('#filter-random');
@@ -15,60 +16,48 @@ const activeButtonToggle = (evt) => {
   evt.target.classList.add('img-filters__button--active');
 };
 
-//Сортировка по умолчанию
-const defaultSorting = (evt, pictures, removePicturesCb) => {
-  activeButtonToggle(evt);
-  removePicturesCb();
-  getPictures(pictures);
-};
+const sortHandler = (evt, removePicturesCb, pictures) => {
 
-//10 рандомных картинок
-const randomSorting = (evt, pictures, removePicturesCb) => {
-  activeButtonToggle(evt);
-  let newArr = [];
-  const randomNum = randomNumGenerator(0, pictures.length - 1);
-  for (let i = 0; i < pictures.length; i++) {
-    const index = randomNum();
-    newArr.push(pictures[index]);
+  //Сортировка по умолчанию
+  if(evt.target === defaultSortButton) {
+    activeButtonToggle(evt);
+    removePicturesCb();
+    getPictures(pictures);
   }
-  newArr = newArr.slice(0,10);
-  removePicturesCb();
-  getPictures(newArr);
-};
 
-//Сортировка по количеству комментариев
-const discussedSorting = (evt, pictures, removePicturesCb) => {
-  activeButtonToggle(evt);
-  const newArr = pictures.slice();
-  newArr.sort((a,b) => {
-    if(a.comments.length > b.comments.length) {
-      return -1;
+  //10 рандомных картинок
+  if(evt.target === randomSortButton) {
+    activeButtonToggle(evt);
+    let randomPics = [];
+    const randomNum = randomNumGenerator(0, pictures.length - 1);
+    for (let i = 0; i < pictures.length; i++) {
+      const index = randomNum();
+      randomPics.push(pictures[index]);
     }
-  });
-  removePicturesCb();
-  getPictures(newArr);
+    randomPics = randomPics.slice(0, 10);
+    removePicturesCb();
+    getPictures(randomPics);
+  }
+
+  //Сортировка по количеству комментариев
+  if(evt.target === discussedSortButton) {
+    activeButtonToggle(evt);
+    const sortedPics = pictures.slice();
+    sortedPics.sort((a,b) => b.comments.length - a.comments.length);
+    removePicturesCb();
+    getPictures(sortedPics);
+  }
 };
 
-const debouncedDefSort = debounce(defaultSorting);
-const debouncedRandomSort = debounce(randomSorting);
-const debouncedDiscussSort = debounce(discussedSorting);
-
+const debouncedSort = debounce(sortHandler);
 const initSort = (data) => {
   const removePicturesList = () => document.querySelectorAll('.picture')
     .forEach((item) => item.remove());
 
   filtersContainer.classList.remove('img-filters--inactive');
 
-  defaultSortButton.addEventListener('click', (evt) => {
-    debouncedDefSort(evt, data, removePicturesList);
-  });
-
-  randomSortButton.addEventListener('click', (evt) => {
-    debouncedRandomSort(evt, data, removePicturesList);
-  });
-
-  discussedSortButton.addEventListener('click', (evt) => {
-    debouncedDiscussSort(evt, data, removePicturesList);
+  filtersForm.addEventListener('click', (evt) => {
+    debouncedSort(evt, removePicturesList, data);
   });
 };
 
