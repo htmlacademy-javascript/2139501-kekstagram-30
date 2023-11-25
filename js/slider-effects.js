@@ -38,7 +38,7 @@ const getEffect = (effect, unit) => {
   sliderContainer.classList.remove('hidden');
   sliderField.noUiSlider.on('update', () => {
     photo.style.filter = `${effect}(${sliderField.noUiSlider.get()}${unit})`;
-    effectValue.value = sliderField.noUiSlider.get();
+    effectValue.value = Number(sliderField.noUiSlider.get());
   });
 };
 

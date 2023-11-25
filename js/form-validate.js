@@ -9,6 +9,7 @@ const imgUploadInterface = document.querySelector('.img-upload__overlay');
 const uploadCloseButton = document.querySelector('.img-upload__cancel');
 const photoCommentInputField = imgUploadForm.querySelector('.text__description');
 const photoHashtagsInputField = imgUploadForm.querySelector('.text__hashtags');
+const submitButton = document.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -23,12 +24,14 @@ const closeModal = () => {
   imgUploadForm.reset();
   pristine.reset();
   uploadCloseButton.removeEventListener('click', closeModal);
+  submitButton.disabled = true;
 };
 
 const openModal = () => {
   imgUploadInterface.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
   uploadCloseButton.addEventListener('click', closeModal);
+  submitButton.disabled = false;
 };
 
 imgUploadInput.addEventListener('change', openModal);
