@@ -1,6 +1,8 @@
 import {getPictures} from './get-pictures';
 import {debounce, randomNumGenerator} from './utils';
 
+const MAX_RANDOM_PICS = 10;
+
 const filtersContainer = document.querySelector('.img-filters');
 const filtersForm = document.querySelector('.img-filters__form');
 const sortButtons = filtersContainer.querySelectorAll('.img-filters__button');
@@ -34,7 +36,7 @@ const sortHandler = (evt, removePicturesCb, pictures) => {
       const index = randomNum();
       randomPics.push(pictures[index]);
     }
-    randomPics = randomPics.slice(0, 10);
+    randomPics = randomPics.slice(0, MAX_RANDOM_PICS);
     removePicturesCb();
     getPictures(randomPics);
   }
