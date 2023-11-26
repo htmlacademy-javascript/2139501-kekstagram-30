@@ -1,6 +1,8 @@
 import {picturesContainer} from './get-pictures';
 import {isEscapeKey} from './utils';
 
+const COMMENTS_SHOWN = 5;
+
 const bigPicturePopup = document.querySelector('.big-picture');
 const bigPictureCloseButton = document.querySelector('.big-picture__cancel');
 const bigPictureImage = bigPicturePopup.querySelector('.big-picture__img').querySelector('img');
@@ -43,7 +45,7 @@ const getBigPictureComments = (array, count) => {
     commentText.textContent = value.message;
     commentsFragment.append(comment);
   });
-  if (array.length <= 5) {
+  if (array.length <= COMMENTS_SHOWN) {
     bigPictureCommentsLoader.classList.add('hidden');
     bigPictureCommentsCount.textContent = newArr.length;
   } else if (count >= array.length) {
@@ -65,7 +67,7 @@ const getBigPicture = (obj) => {
 
 const showBigPicture = (data) => {
   picturesContainer.addEventListener('click', (evt) => {
-    let count = 5;
+    let count = COMMENTS_SHOWN;
     data.forEach((value) => {
       if (value.id === Number(evt.target.dataset.id)) {
         openBigPicture();

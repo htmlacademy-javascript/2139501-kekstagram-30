@@ -1,6 +1,9 @@
 import {isEscapeKey} from './utils';
 import {sendServerData} from './server';
 
+const MAX_COMMENT_LENGTH = 140;
+const MAX_HASHTAGS_COUNT = 5;
+
 const hashtagRegular = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const imgUploadInput = document.querySelector('.img-upload__input');
@@ -9,6 +12,7 @@ const imgUploadInterface = document.querySelector('.img-upload__overlay');
 const uploadCloseButton = document.querySelector('.img-upload__cancel');
 const photoCommentInputField = imgUploadForm.querySelector('.text__description');
 const photoHashtagsInputField = imgUploadForm.querySelector('.text__hashtags');
+const submitButton = document.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -23,12 +27,14 @@ const closeModal = () => {
   imgUploadForm.reset();
   pristine.reset();
   uploadCloseButton.removeEventListener('click', closeModal);
+  submitButton.disabled = true;
 };
 
 const openModal = () => {
   imgUploadInterface.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
   uploadCloseButton.addEventListener('click', closeModal);
+  submitButton.disabled = false;
 };
 
 imgUploadInput.addEventListener('change', openModal);
@@ -47,12 +53,12 @@ photoHashtagsInputField.addEventListener('keydown', (evt) => {
 });
 
 //Валидация описания фотографии
-const validateComment = (value) => value.length <= 140;
+const validateComment = (value) => value.length <= MAX_COMMENT_LENGTH;
 
 pristine.addValidator(
   photoCommentInputField,
   validateComment,
-  'Не более 140 символов'
+  `Не более ${MAX_COMMENT_LENGTH} символов`
 );
 //Валидация хэш-тегов
 const getHashtagNormalize = (tagString) => tagString
@@ -61,7 +67,7 @@ const getHashtagNormalize = (tagString) => tagString
   .split(' ')
   .filter((tag) => Boolean(tag.length));
 const validateHashtagSymbols = (value) => getHashtagNormalize(value).every((tag) => hashtagRegular.test(tag));
-const validateHashtagsCount = (value) => getHashtagNormalize(value).length <= 5;
+const validateHashtagsCount = (value) => getHashtagNormalize(value).length <= MAX_HASHTAGS_COUNT;
 const validateHashtagsUnic = (value) => getHashtagNormalize(value).length === new Set(getHashtagNormalize(value)).size;
 
 pristine.addValidator(
@@ -72,7 +78,7 @@ pristine.addValidator(
 pristine.addValidator(
   photoHashtagsInputField,
   validateHashtagsCount,
-  'Не более 5 хэш-тегов'
+  `Не более ${MAX_HASHTAGS_COUNT} хэш-тегов`
 );
 pristine.addValidator(
   photoHashtagsInputField,
