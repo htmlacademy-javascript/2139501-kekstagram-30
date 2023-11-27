@@ -1,6 +1,6 @@
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-function debounce (callback, timeoutDelay = 400) {
+const debounce = (callback, timeoutDelay = 400) => {
   // Используем замыкания, чтобы id таймаута у нас навсегда приклеился
   // к возвращаемой функции с setTimeout, тогда мы его сможем перезаписывать
   let timeoutId;
@@ -16,7 +16,7 @@ function debounce (callback, timeoutDelay = 400) {
     // Таким образом цикл «поставить таймаут - удалить таймаут» будет выполняться,
     // пока действие совершается чаще, чем переданная задержка timeoutDelay
   };
-}
+};
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -25,7 +25,7 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-function randomNumGenerator (min, max) {
+const randomNumGenerator = (min, max) => {
   const previousValues = [];
 
   return function () {
@@ -39,7 +39,7 @@ function randomNumGenerator (min, max) {
     previousValues.push(currentValue);
     return currentValue;
   };
-}
+};
 
 export {isEscapeKey,debounce,randomNumGenerator};
 
