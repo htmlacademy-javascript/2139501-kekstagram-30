@@ -31,7 +31,7 @@ document.addEventListener('keydown', (evt) => {
   if(isEscapeKey(evt)) {
     closeBigPicture();
   }
-});
+}, {once: true});
 
 const getBigPictureComments = (array, count) => {
   bigPictureComments.innerHTML = '';

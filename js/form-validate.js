@@ -1,5 +1,7 @@
 import {isEscapeKey} from './utils';
 import {sendServerData} from './server';
+import {resetScale} from './photo-scale';
+import {resetEffects} from './slider-effects';
 
 const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAGS_COUNT = 5;
@@ -28,6 +30,8 @@ const closeModal = () => {
   pristine.reset();
   uploadCloseButton.removeEventListener('click', closeModal);
   submitButton.disabled = true;
+  resetScale();
+  resetEffects();
 };
 
 const openModal = () => {
@@ -42,7 +46,7 @@ document.addEventListener('keydown', (evt) => {
   if(isEscapeKey(evt) && !document.querySelector('.error')) {
     closeModal();
   }
-});
+}, {once: true});
 
 photoCommentInputField.addEventListener('keydown', (evt) => {
   evt.stopPropagation();

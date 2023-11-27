@@ -32,18 +32,17 @@ const getSuccessMessage = () => {
     if(isEscapeKey(evt)) {
       removeSuccessMessage();
     }
-  });
+  }, {once: true});
   successTemplateContent.addEventListener('click', (evt) => {
     if (evt.target !== successWrapper && evt.target !== successTitle) {
       removeSuccessMessage();
     }
-  });
+  }, {once: true});
 };
 
 const removeUploadErrorMessage = () => {
   uploadErrorTemplateContent.remove();
   uploadErrorCloseButton.removeEventListener('click', removeUploadErrorMessage);
-  document.removeEventListener('click', removeUploadErrorMessage);
 };
 
 const getUploadErrorMessage = () => {
@@ -54,12 +53,12 @@ const getUploadErrorMessage = () => {
     if(isEscapeKey(evt)) {
       removeUploadErrorMessage();
     }
-  });
+  }, {once: true});
   document.addEventListener('click', (event) => {
     if (event.target !== uploadErrorPopup) {
       removeUploadErrorMessage();
     }
-  });
+  }, {once: true});
 };
 
 export {getDownloadErrorMessage, getSuccessMessage, getUploadErrorMessage};
