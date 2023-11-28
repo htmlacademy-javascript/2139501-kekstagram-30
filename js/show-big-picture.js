@@ -18,16 +18,16 @@ const bigPictureCommentsLoader = bigPicturePopup.querySelector('.comments-loader
 const closeBigPicture = () => {
   bigPicturePopup.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
-  document.removeEventListener('keydown', closeByEscape);
+  document.removeEventListener('keydown', onDocumentKeydown);
 };
 
 const openBigPicture = () => {
   bigPicturePopup.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
-  document.addEventListener('keydown', closeByEscape);
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
-function closeByEscape (evt) {
+function onDocumentKeydown (evt) {
   if(isEscapeKey(evt)) {
     closeBigPicture();
   }
