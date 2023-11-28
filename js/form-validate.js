@@ -46,7 +46,7 @@ document.addEventListener('keydown', (evt) => {
   if(isEscapeKey(evt) && !document.querySelector('.error')) {
     closeModal();
   }
-}, {once: true});
+});
 
 photoCommentInputField.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
