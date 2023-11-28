@@ -6,7 +6,7 @@ const getPictures = (data) => {
   data.forEach(({id, url, description, likes, comments}) => {
     const picture = pictureTemplate.cloneNode(true);
     const photo = picture.querySelector('.picture__img');
-    photo.dataset.id = id;
+    picture.dataset.id = id;
     photo.src = url;
     photo.alt = description;
     picture.querySelector('.picture__likes').textContent = likes;
