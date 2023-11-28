@@ -6,7 +6,7 @@ import {resetEffects} from './slider-effects';
 const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAGS_COUNT = 5;
 
-const hashtagRegular = /^#[a-zа-яё0-9]{1,19}$/i;
+const HASHTAG_REGULAR = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const imgUploadInput = document.querySelector('.img-upload__input');
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -70,7 +70,7 @@ const getHashtagNormalize = (tagString) => tagString
   .trim()
   .split(' ')
   .filter((tag) => Boolean(tag.length));
-const validateHashtagSymbols = (value) => getHashtagNormalize(value).every((tag) => hashtagRegular.test(tag));
+const validateHashtagSymbols = (value) => getHashtagNormalize(value).every((tag) => HASHTAG_REGULAR.test(tag));
 const validateHashtagsCount = (value) => getHashtagNormalize(value).length <= MAX_HASHTAGS_COUNT;
 const validateHashtagsUnic = (value) => getHashtagNormalize(value).length === new Set(getHashtagNormalize(value)).size;
 
