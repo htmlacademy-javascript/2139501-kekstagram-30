@@ -28,7 +28,7 @@ const getRandomInteger = (a, b) => {
 const randomNumGenerator = (min, max) => {
   const previousValues = [];
 
-  return function () {
+  return () => {
     let currentValue = getRandomInteger(min, max);
     if (previousValues.length >= (max - min + 1)) {
       return null;
